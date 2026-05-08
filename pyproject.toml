@@ -2,19 +2,73 @@
 name = "ai-ethics-law-mini-project"
 version = "0.1.0"
 description = "Mini-projekt — Aspekty prawne, społeczne i etyczne w AI (PWr 2025/2026)"
-requires-python = ">=3.11"
+requires-python = ">=3.13,<3.14"
+readme = "README.md"
+license = { text = "MIT" }
+
+# Rdzeń jak w dermatoscopy_ai + pakiety szablonu kursu (API LLM, logowanie, dane).
 dependencies = [
+    "numpy>=1.20.0",
+    "pillow>=9.0.0",
+    "matplotlib>=3.5.0",
+    "pycocotools>=2.0.6",
+    "sahi==0.11.36",
+    "opencv-python-headless==4.10.0.84",
+    "rfdetr[train,loggers]==1.6.4",
+    "torch==2.11.0+cu128",
+    "torchvision==0.26.0+cu128",
+    "torchaudio==2.11.0+cu128",
     "openai>=1.82",
     "anthropic>=0.52",
     "google-genai>=1.14",
     "loguru>=0.7",
     "python-dotenv>=1.1",
     "pandas>=2.2",
-    "matplotlib>=3.9",
 ]
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu128" }]
+torchvision = [{ index = "pytorch-cu128" }]
+torchaudio = [{ index = "pytorch-cu128" }]
+
+# Public PyPI first (jak w dermatoscopy_ai).
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0.0",
+    "ruff>=0.1.0",
+]
+
+[tool.uv]
+default-groups = ["dev"]
 
 [project.optional-dependencies]
 notebooks = [
     "jupyter>=1.0",
     "ipykernel>=6.29",
 ]
+xai = [
+    "scipy>=1.11",
+]
+rfdetr-xai = [
+    "grad-cam>=1.5.5",
+    "supervision>=0.27.0.post2",
+    "tqdm>=4.67.3",
+    "vision-explanation-methods>=0.0.2",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# Repozytorium ze skryptami w ``src/`` — bez importowalnego pakietu katalogowego.
+[tool.setuptools]
+packages = []

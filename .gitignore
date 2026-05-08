@@ -20,9 +20,11 @@ node_modules/
 .env
 .env.local
 
-# IDE
+# IDE / narzędzia agentów (tylko lokalnie)
 .vscode/
 .idea/
+.cursor/
+.opencode/
 *.swp
 *.swo
 *~
@@ -40,10 +42,26 @@ Thumbs.db
 *.bin
 *.onnx
 
-# uv
+# uv — lock commitujemy, żeby `uv sync` odtwarzał te same wersje zależności
 .python-version
-uv.lock
 
-# Dane wrażliwe
+# Wygenerowane lokalnie (checkpointi, duże CSV eksperymentów — nie commituj)
+wyniki/*
+!wyniki/.gitkeep
+!wyniki/README.md
+!wyniki/xai_demo/
+!wyniki/xai_demo/**
+
+# Przykładowe figury z notebooków XAI (README — nie zależą od katalogu rfdetr-xai)
+!wyniki/notebook_xai_przyklady/
+!wyniki/notebook_xai_przyklady/**
+
+# CSV domyślnie poza repo (tabele z własnych eksperymentów); wyjątek: małe demo pod zaliczenie
 *.csv
-!wyniki/*.csv
+!wyniki/xai_demo/*.csv
+
+# PNG z dema metryk (matplotlib) — commitujemy razem z CSV/SVG
+!wyniki/xai_demo/*.png
+
+# Dane wrażliwe — wyjątki jeśli kiedyś zechcesz commitować mały artefakt:
+# !docs/fixtures/example.csv

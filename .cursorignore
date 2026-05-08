@@ -1,0 +1,10 @@
+.venv/
+venv/
+__pycache__/
+.ipynb_checkpoints/
+wyniki/
+*.pt
+*.pth
+*.onnx
+*.bin
+*.h5
