@@ -23,6 +23,26 @@ Szczegóły zapisanych wyników: [notebooks/WNIOSKI_ANALIZA_NOTEBOOKOW_XAI.md](n
 
 ---
 
+## USAGE — reprodukcja dla zespołu (drugie repo, PLGrid, dane)
+
+Ten mini-projekt (**XAI / notebooki**) jest powiązany z osobnym repozytorium treningowym:
+
+- **[`bmruszaj/dermatoscopy_ai`](https://github.com/bmruszaj/dermatoscopy_ai)** — trening **RF-DETR**, przygotowanie adnotacji w formacie **COCO**, skrypty i zależności do przetwarzania danych detekcji.  
+  **Repozytorium jest prywatne** — wejście wymaga **nadania dostępu** (np. zaproszenie do współpracy). Nie jest to warunek formalny samego mini-projektu kursowego, ale **ułatwienie dla zespołu**, żeby powtórzyć pełną ścieżkę: dane → trening → checkpoint → notebooki XAI w tym repo.
+
+**Zbiór danych (etykiety / dostęp do obrazów)** jest hostowany poza GitHubem, na **prywatnym** portalu: [https://oldtown.digitalcloud.cc/](https://oldtown.digitalcloud.cc/) (Old Town Clinic / chmura — dostęp wg umowy zespołu z kliniką).
+
+**PLGrid (ACK Cyfronet)** — skrypt ustawiający na klastrze moduły `GCCcore` / `Python 3.13`, **uv**, wirtualne środowisko i `uv sync` dla klonu `dermatoscopy_ai` w katalogu roboczym (`$SCRATCH`):
+
+- w tym repo (kopia dokumentacyjna): [`scripts/plgrid/setup_uv_py313_dermatoscopy_ai.sh`](scripts/plgrid/setup_uv_py313_dermatoscopy_ai.sh)  
+- kanoniczna ścieżka w repo treningowym: `dermatoscopy_ai/scripts/setup_uv_py313.sh`
+
+Przed uruchomieniem na PLGrid **dostosuj** w skrypcie zmienne `ROOT_DIR`, `PROJECT_DIR` i ewentualnie `UV_BIN_DEFAULT` do swojego loginu i lokalizacji klonu. Uruchomienie: `bash scripts/plgrid/setup_uv_py313_dermatoscopy_ai.sh` (z węzła interaktywnego lub jako krok w jobie, po `module load` zgodnie z polityką klastra).
+
+**To repo (mini-projekt)** nadal uruchamiasz lokalnie lub na maszynie z GPU przez `uv sync --extra notebooks --extra rfdetr-xai` i Jupyter — patrz [Quick Start](#quick-start). Skrypt PLGrid dotyczy przede wszystkim **środowiska treningowego** w `dermatoscopy_ai`.
+
+---
+
 ## Checklist oddania (wymagania formalne)
 
 Zgodnie z [ZASADY_ZALICZENIA_MINI_PROJEKT.md](docs/context/ZASADY_ZALICZENIA_MINI_PROJEKT.md) — przed terminem sprawdź:
